@@ -13,6 +13,10 @@ public class EmployeeModel {
     @GeneratedValue
     private int id;
     private String employeeCode;
+    private String name;
+
+
+
     private String designation;
     private String salary;
     private String email;
@@ -23,12 +27,32 @@ public class EmployeeModel {
     public EmployeeModel() {
     }
 
+    public EmployeeModel(int id, String employeeCode, String name, String designation, String salary, String email, String phoneNo, String username, String password) {
+        this.id = id;
+        this.employeeCode = employeeCode;
+        this.name = name;
+        this.designation = designation;
+        this.salary = salary;
+        this.email = email;
+        this.phoneNo = phoneNo;
+        this.username = username;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmployeeCode() {
@@ -87,14 +111,5 @@ public class EmployeeModel {
         this.password = password;
     }
 
-    public EmployeeModel(int id, String employeeCode, String designation, String salary, String email, String phoneNo, String username, String password) {
-        this.id = id;
-        this.employeeCode = employeeCode;
-        this.designation = designation;
-        this.salary = salary;
-        this.email = email;
-        this.phoneNo = phoneNo;
-        this.username = username;
-        this.password = password;
-    }
+
 }
