@@ -13,7 +13,7 @@ public interface EmployeeDao extends CrudRepository<EmployeeModel,Integer> {
     List<EmployeeModel> searchEmp(String name);
 
     @Query(value = "SELECT * FROM `employees` WHERE `username` =:username AND `password` =:password",nativeQuery = true)
-    List<EmployeeModel> userLogin(String username,String password);
+    List<EmployeeModel> empLogin(String username,String password);
 
     @Modifying
     @Transactional
@@ -25,7 +25,7 @@ public interface EmployeeDao extends CrudRepository<EmployeeModel,Integer> {
     @Query(value = "UPDATE `employees` SET `designation`=:designation,`email`=:email,`employee_code`=:employeeCode,`name`=:name,`password`=:password,`phone_no`=:phoneNo,`salary`=:salary,`username`=:username WHERE `id`=:id",nativeQuery = true)
     void editEmp(String designation,String email,String employeeCode,String name,String password,String phoneNo,String salary,String username,int id);
 
-    @Query(value = "SELECT `name`,`employee_code`,`email`,`phone_no`,`designation`,`salary` FROM `employees` WHERE `id`= :empId",nativeQuery = true)
+    @Query(value = "SELECT * FROM `employees` WHERE `id`= :empId",nativeQuery = true)
     List<EmployeeModel> viewProfile(String empId);
 }
 
