@@ -5,10 +5,7 @@ import com.nest.nestdigitalapp_backend.model.EmployeeModel;
 import com.nest.nestdigitalapp_backend.model.LeaveCountModel;
 import com.nest.nestdigitalapp_backend.model.SecurityGuardModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +23,7 @@ public class SecurityGuardController {
         List<SecurityGuardModel> result = (List<SecurityGuardModel>) sdao.secGuardLogin(s.getUsername(),s.getPassword());
         if(result.size()>0){
             map.put("status","success");
+            map.put("secId",String.valueOf(result.get(0).getId()));
         } else {
             map.put("status","fail");
         }
@@ -42,15 +40,15 @@ public class SecurityGuardController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/viewSec")
+    public List<SecurityGuardModel> viewSecurityGuard(){
+        return (List<SecurityGuardModel>) sdao.findAll();
+    }
+
+    @CrossOrigin(origins = "*")
     @PostMapping(path = "/viewSecProfile", consumes = "application/json", produces = "application/json")
-    public HashMap<String, String> viewSecGuardProfile(@RequestBody SecurityGuardModel s){
-        List<SecurityGuardModel> result = (List<SecurityGuardModel>) sdao.viewSecProfile(s.getId());
-        HashMap<String,String > map = new HashMap<>();
-        if (result.size()>0){
-            map.put("status","success");
-            map.put("empId",String.valueOf(result.get(0).getId()));
-        }
-        return map;
+    public List<SecurityGuardModel> viewSecGuardProfile(@RequestBody SecurityGuardModel s){
+         return  (List<SecurityGuardModel>) sdao.viewSecProfile(s.getId());
     }
 
 }

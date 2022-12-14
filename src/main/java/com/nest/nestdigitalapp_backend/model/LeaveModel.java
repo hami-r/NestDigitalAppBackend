@@ -17,14 +17,14 @@ public class LeaveModel {
     private String fromDate;
     private String toDate;
     private String appliedDate;
-    private int status;
+    private String status;
     private String type;
     private int empId;
 
     public LeaveModel() {
     }
 
-    public LeaveModel(int id, String title, String remarks, String fromDate, String toDate, String appliedDate, int status, String type, int empId) {
+    public LeaveModel(int id, String title, String remarks, String fromDate, String toDate, String appliedDate, String status, String type, int empId) {
         this.id = id;
         this.title = title;
         this.remarks = remarks;
@@ -84,11 +84,11 @@ public class LeaveModel {
         this.appliedDate = appliedDate;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
