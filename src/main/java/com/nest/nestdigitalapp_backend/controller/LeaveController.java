@@ -47,6 +47,12 @@ public class LeaveController {
     }
 
     @CrossOrigin(origins = "*")
+    @PostMapping(path = "/viewLeaveCountEmp",consumes = "application/json", produces = "application/json")
+    public List<LeaveCountModel> viewLeaveCountEmp(@RequestBody LeaveCountModel lc){
+        return (List<LeaveCountModel>) lcdao.viewLeaveCountEmp(lc.getEmpId());
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/viewAllLeaves")
     public List<Map<String, String>> viewAllLeaves(){
         return (List<Map<String, String>>) ldao.viewAllLeaves();
