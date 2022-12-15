@@ -16,16 +16,18 @@ public class EmployeeLogsModel {
     private String date;
     private String entryTime;
     private String exitTime;
+    private String employeeCode;
 
     public EmployeeLogsModel() {
     }
 
-    public EmployeeLogsModel(int id, int empId, String date, String entryTime, String exitTime) {
+    public EmployeeLogsModel(int id, int empId, String date, String entryTime, String exitTime, String employeeCode) {
         this.id = id;
         this.empId = empId;
         this.date = date;
         this.entryTime = entryTime;
         this.exitTime = exitTime;
+        this.employeeCode = employeeCode;
     }
 
     public int getId() {
@@ -42,6 +44,14 @@ public class EmployeeLogsModel {
 
     public void setEmpId(int empId) {
         this.empId = empId;
+    }
+
+    public String getEmployeeCode() {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode) {
+        this.employeeCode = employeeCode;
     }
 
     public String getDate() {

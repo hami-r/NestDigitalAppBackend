@@ -22,11 +22,14 @@ public interface EmployeeDao extends CrudRepository<EmployeeModel,Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE `employees` SET `designation`=:designation,`email`=:email,`employee_code`=:employeeCode,`name`=:name,`password`=:password,`phone_no`=:phoneNo,`salary`=:salary,`username`=:username WHERE `id`=:id",nativeQuery = true)
-    void editEmp(String designation,String email,String employeeCode,String name,String password,String phoneNo,String salary,String username,int id);
+    @Query(value = "UPDATE `employees` SET `designation`=:designation,`email`=:email,`employee_code`=:employeeCode,`name`=:name,`phone_no`=:phoneNo,`salary`=:salary WHERE `id`=:id",nativeQuery = true)
+    void editEmp(String designation,String email,String employeeCode,String name,String phoneNo,String salary   ,int id);
 
     @Query(value = "SELECT * FROM `employees` WHERE `id`= :empId",nativeQuery = true)
     List<EmployeeModel> viewProfile(String empId);
+
+    @Query(value = "SELECT * FROM `employees` WHERE `employee_code`= :empCode",nativeQuery = true)
+    List<EmployeeModel> getEmpByCode(String empCode);
 }
 
 

@@ -2,11 +2,9 @@ package com.nest.nestdigitalapp_backend.controller;
 
 import com.nest.nestdigitalapp_backend.dao.EmployeeDao;
 import com.nest.nestdigitalapp_backend.dao.EmployeeLogsDao;
+import com.nest.nestdigitalapp_backend.dao.LeaveDao;
 import com.nest.nestdigitalapp_backend.dao.VisitorLogsDao;
-import com.nest.nestdigitalapp_backend.model.EmployeeLogsModel;
-import com.nest.nestdigitalapp_backend.model.EmployeeModel;
-import com.nest.nestdigitalapp_backend.model.LeaveCountModel;
-import com.nest.nestdigitalapp_backend.model.VisitorLogsModel;
+import com.nest.nestdigitalapp_backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +20,27 @@ public class LogController {
     @Autowired
     private VisitorLogsDao vldao;
 
+    @Autowired
+    private EmployeeDao edao;
+
+    @Autowired
+    private LeaveDao ldao;
+
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/addEmployeeLogs",consumes = "application/json", produces = "application/json")
     public HashMap<String, String> addEmployeeLogs(@RequestBody EmployeeLogsModel el){
-        eldao.save(el);
         HashMap<String,String > map = new HashMap<>();
-        map.put("status","success");
+        List<EmployeeModel> id = edao.getEmpByCode(el.getEmployeeCode());
+        if(id.size()>0){
+            List<LeaveModel> checkLeaves = ldao.checkEmpLeave(id.get(0).getId(),el.getDate());
+            if (checkLeaves.size() == 0){
+                el.setEmpId(id.get(0).getId());
+                eldao.save(el);
+                map.put("status","success");
+            } else {
+                map.put("status","fail");
+            }
+        }
         return map;
     }
 
